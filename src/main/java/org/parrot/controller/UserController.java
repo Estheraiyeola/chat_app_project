@@ -14,22 +14,22 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public User registerUser(@ModelAttribute RegisterUserRequest registerUserRequest) throws UserAlreadyExistsException {
+    public User registerUser(@RequestBody RegisterUserRequest registerUserRequest) throws UserAlreadyExistsException {
         User registerUser = userService.registerUser(registerUserRequest);
         return registerUser;
     }
     @PostMapping("/login")
-    public LoginResponse authentication(LoginRequest loginRequest){
+    public LoginResponse authentication(@RequestBody LoginRequest loginRequest){
         LoginResponse loginResponse = userService.loginUser(loginRequest);
         return loginResponse;
     }
     @PostMapping("/parrot/send")
-    public String sendMessage(SendMessageRequest sendMessageRequest){
+    public String sendMessage(@RequestBody SendMessageRequest sendMessageRequest){
         userService.sendMessage(sendMessageRequest);
         return "Message sent successfully";
     }
     @DeleteMapping("/parrot/delete_one")
-    public String deleteMessage(DeleteMessageRequest deleteMessageRequest){
+    public String deleteMessage(@RequestBody DeleteMessageRequest deleteMessageRequest){
         userService.deleteMessage(deleteMessageRequest);
         return "Message deleted successfully";
     }
@@ -39,7 +39,7 @@ public class UserController {
         return "Chats cleared";
     }
     @PutMapping("/parrot/edit")
-    public String editMessage(EditMessageRequest editMessageRequest){
+    public String editMessage(@RequestBody EditMessageRequest editMessageRequest){
         userService.editMessage(editMessageRequest);
         return "Successfully Edited";
     }
